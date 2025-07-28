@@ -1,26 +1,19 @@
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
-import { Suspense, useMemo, useState } from "react";
+import { Container } from "@mui/material";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RouterProvider } from "react-router";
+import CustomThemeProvider from "./components/CustomThemeProvider";
 import GlobalError from "./components/GlobalError";
+import { LanguageProvider } from "./components/LanguageProvider";
 import Loading from "./components/Loading";
-import getAppTheme from "./utils/theme";
 import router from "./config/routes";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
-  // TODO: Add theme and language state management into context api
-  const [mode, setMode] = useState("light");
-  const [language, setLanguage] = useState("en");
-
-  const theme = useMemo(
-    () => getAppTheme(mode, language === "ar" ? "rtl" : "ltr"),
-    [mode, language]
-  );
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="md">
+    <CustomThemeProvider>
+      <LanguageProvider>
         <ErrorBoundary
           FallbackComponent={GlobalError}
           onReset={(details) => {
@@ -28,11 +21,13 @@ function App() {
           }}
         >
           <Suspense fallback={<Loading />}>
+            <Header />
             <RouterProvider router={router} />
+            <Footer />
           </Suspense>
         </ErrorBoundary>
-      </Container>
-    </ThemeProvider>
+      </LanguageProvider>
+    </CustomThemeProvider>
   );
 }
 
