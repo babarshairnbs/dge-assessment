@@ -1,43 +1,18 @@
 import ControlSelect from "@/components/ControlSelect";
 import ControlTextField from "@/components/ControlTextField";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Grid } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Box, Grid } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import * as yup from "yup";
 import {
-  defaultValues,
   employmentStatusOptions,
   housingStatusOptions,
   maritalStatusOptions,
 } from "../Constants/formConstant";
 
-const FamilyFinancialInfo = ({ onNext, onBack }) => {
+const FamilyFinancialInfo = () => {
   const { t } = useTranslation();
 
-  const schema = yup.object().shape({
-    maritalStatus: yup.string().required(t("MaritalStatusIsRequired")),
-    dependents: yup
-      .number()
-      .typeError(t("DependentsMustBeNumber"))
-      .required(t("DependentsAreRequired")),
-    employmentStatus: yup.string().required(t("EmploymentStatusIsRequired")),
-    monthlyIncome: yup
-      .number()
-      .typeError(t("MonthlyIncomeMustBeNumber"))
-      .required(t("MonthlyIncomeIsRequired")),
-    housingStatus: yup.string().required(t("HousingStatusIsRequired")),
-  });
-
-  const { control, handleSubmit } = useForm({
-    defaultValues: defaultValues.familyFinancialInfo,
-    // resolver: yupResolver(schema),
-    mode: "all",
-  });
-
-  const onSubmit = (data) => {
-    onNext(data);
-  };
+  const { control } = useFormContext(); // Access form methods from FormProvider
 
   const gridSize6 = {
     xs: 12,
@@ -45,7 +20,7 @@ const FamilyFinancialInfo = ({ onNext, onBack }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate mb={6}>
+    <Box mb={6}>
       <Grid container spacing={2}>
         <Grid size={gridSize6} mb={2}>
           <ControlSelect
@@ -95,15 +70,6 @@ const FamilyFinancialInfo = ({ onNext, onBack }) => {
           />
         </Grid>
       </Grid>
-
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
-        <Button variant="outlined" onClick={onBack}>
-          {t("Back")}
-        </Button>
-        <Button type="submit" variant="contained">
-          {t("Next")}
-        </Button>
-      </Box>
     </Box>
   );
 };

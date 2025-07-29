@@ -1,22 +1,34 @@
-import { Box, Grid, Button, IconButton, Snackbar, Alert } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
 import ControlTextField from "@/components/ControlTextField";
-// import { useAIHelper } from "@/hooks/useAIHelper";
 import AIPopup from "@/components/Modal";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { Alert, Box, Button, Grid, Snackbar } from "@mui/material";
+import { useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import useRequest from "../../../hooks/useRequest";
 import { generateGPTText } from "../../../services/formService";
 
 const SituationDescription = ({ onBack, onSubmit }) => {
-  const [openPopup, setOpenPopup] = useState(false);
-  const [targetField, setTargetField] = useState(null);
-  const [open, setOpen] = useState(false);
   const { t } = useTranslation();
+  const [openPopup, setOpenPopup] = useState(false);
+  const [open, setOpen] = useState(false);
+  const targetField = useRef("");
 
+  /**
+   * Custom hook usage for handling GPT text generation requests.
+   *
+   * @typedef {Object} UseRequestResult
+   * @property {Function} request - Function to initiate the GPT text generation request.
+   * @property {boolean} isLoading - Indicates if the request is currently loading.
+   * @property {*} data - The generated suggestion data from GPT.
+   * @property {Function} setData - Function to manually set the suggestion data.
+   * @property {Error|null} error - Error object if the request fails.
+   *
+   * @param {Function} generateGPTText - Function to generate text using GPT.
+   * @param {Object} options - Options for the request hook.
+   * @param {Function} options.onError - Callback for handling errors during text generation.
+   * @returns {UseRequestResult} Result object containing request state and handlers.
+   */
   const {
     request: fetchSuggestion,
     isLoading,
@@ -25,31 +37,26 @@ const SituationDescription = ({ onBack, onSubmit }) => {
     error,
   } = useRequest(generateGPTText, {
     onError: (error) => {
-      console.log("Error generating text:", error);
       setOpen(true);
     },
   });
 
-  const { control, handleSubmit, setValue } = useForm({
-    // defaultValues: defaultValues,
-    // resolver: yupResolver(schema),
-    mode: "all",
-  });
+  const { control, setValue } = useFormContext();
 
   const handleHelp = (field, prompt) => {
-    setTargetField(field);
+    targetField.current = field;
     fetchSuggestion(prompt);
     setOpenPopup(true);
   };
 
   const handleAccept = () => {
-    setValue(targetField, suggestion?.result || "");
+    setValue(targetField?.current, suggestion?.result || "");
     setOpenPopup(false);
     setSuggestion("");
   };
 
   const handleDiscard = () => {
-    setTargetField(null);
+    targetField.current = "field";
     setOpenPopup(false);
     setSuggestion("");
   };
@@ -59,7 +66,7 @@ const SituationDescription = ({ onBack, onSubmit }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Box>
       <Grid container spacing={2}>
         <Grid size={12} mb={2}>
           <ControlTextField
@@ -137,15 +144,6 @@ const SituationDescription = ({ onBack, onSubmit }) => {
           </Button>
         </Grid>
       </Grid>
-
-      <Box display="flex" justifyContent="space-between" mt={4}>
-        <Button variant="outlined" onClick={onBack}>
-          {t("Back")}
-        </Button>
-        <Button type="submit" variant="contained">
-          {t("Submit")}
-        </Button>
-      </Box>
 
       <AIPopup
         open={openPopup}

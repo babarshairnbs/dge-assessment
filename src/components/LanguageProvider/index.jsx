@@ -3,18 +3,23 @@ import { useTranslation } from "react-i18next";
 import useThemeMode from "../../hooks/useThemeMode";
 import { LanguageContextProvider } from "../../context/LanguageContext";
 import { GLOBAL_CONSTANTS, LANGUAGE } from "../../constants";
+import STORAGE_KEY from "../../constants/Storage";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "../../services/localStorageService";
 
 export const LanguageProvider = ({ children }) => {
   const { i18n } = useTranslation();
   const { setDirection } = useThemeMode();
 
   const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem("social_support_language");
+    const savedLanguage = getLocalStorageItem(STORAGE_KEY.LANGUAGE);
     return savedLanguage || LANGUAGE.EN;
   });
 
   const [direction, setDirectionState] = useState(() => {
-    const savedLanguage = localStorage.getItem("social_support_language");
+    const savedLanguage = getLocalStorageItem(STORAGE_KEY.LANGUAGE);
     return savedLanguage === LANGUAGE.AR
       ? GLOBAL_CONSTANTS.DIRECTION.RTL
       : GLOBAL_CONSTANTS.DIRECTION.LTR;
@@ -48,7 +53,7 @@ export const LanguageProvider = ({ children }) => {
     setDirection(newDirection);
 
     // Save to localStorage
-    localStorage.setItem("social_support_language", newLanguage);
+    setLocalStorageItem(STORAGE_KEY.LANGUAGE, newLanguage);
   };
 
   const contextValue = {

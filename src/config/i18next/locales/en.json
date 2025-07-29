@@ -77,5 +77,10 @@
   "HelpMeWrite": "Help me write",
   "ApplicationSubmittedSuccessfully": "Application Submitted Successfully!",
   "ThankYouForSubmittingYourApplication": "Thank you for submitting your application. We'll review your information and get back to you soon.",
-  "SubmitAnotherApplication": "Submit Another Application"
+  "SubmitAnotherApplication": "Submit Another Application",
+  "ApplicationForm": "Application Form",
+  "SomethingWentWrong": "Something went wrong!",
+  "UnexpectedErrorMessage": "An unexpected error occurred. Please try again or return to the home screen.",
+  "TryAgain": "Try Again",
+  "GoHome": "Go Home"
 }

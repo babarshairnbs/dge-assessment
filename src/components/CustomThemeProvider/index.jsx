@@ -4,17 +4,22 @@ import React, { useEffect, useState } from "react";
 import { ThemeContextProvider } from "../../context/ThemeContext";
 import getAppTheme from "../../utils/theme";
 import { GLOBAL_CONSTANTS } from "../../constants";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "../../services/localStorageService";
+import STORAGE_KEY from "../../constants/Storage";
 
 const CustomThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
-    const savedMode = localStorage.getItem("social_support_theme_mode");
+    const savedMode = getLocalStorageItem(STORAGE_KEY.THEME);
     return savedMode || GLOBAL_CONSTANTS.THEME.LIGHT;
   });
 
   const [direction, setDirection] = useState(GLOBAL_CONSTANTS.DIRECTION.LTR);
 
   useEffect(() => {
-    localStorage.setItem("social_support_theme_mode", mode);
+    setLocalStorageItem(STORAGE_KEY.THEME, mode);
   }, [mode]);
 
   const toggleMode = () => {
@@ -31,7 +36,7 @@ const CustomThemeProvider = ({ children }) => {
   );
 
   const contextValue = {
-    mode,
+    mode: "light",
     toggleMode,
     direction,
     setDirection,

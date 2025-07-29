@@ -12,9 +12,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { GLOBAL_CONSTANTS, LANGUAGE } from "../../constants";
-import { useLanguage } from "../../hooks/useLanguage";
-import useThemeMode from "../../hooks/useThemeMode";
+import { GLOBAL_CONSTANTS, LANGUAGE } from "../../../constants";
+import { useLanguage } from "../../../hooks/useLanguage";
+import useThemeMode from "../../../hooks/useThemeMode";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {

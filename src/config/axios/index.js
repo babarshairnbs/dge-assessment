@@ -1,5 +1,6 @@
 import axios from "axios";
 import STORAGE_KEY from "../../constants/Storage";
+import { getLocalStorageItem } from "../../services/localStorageService";
 
 // Create an Axios instance
 const apiClient = axios.create({
@@ -13,7 +14,7 @@ const apiClient = axios.create({
 // Request Interceptor
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(STORAGE_KEY.TOKEN); // Optional: JWT or other auth token
+    const token = getLocalStorageItem(STORAGE_KEY.TOKEN); // Optional: JWT or other auth token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

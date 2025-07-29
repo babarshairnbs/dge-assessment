@@ -1,5 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import STORAGE_KEY from "../../constants/Storage";
+import { getLocalStorageItem } from "../../services/localStorageService";
 
 import { LANGUAGE } from "../../constants";
 
@@ -18,7 +20,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem("social_support_language") || LANGUAGE.EN,
+  lng: getLocalStorageItem(STORAGE_KEY.LANGUAGE) || LANGUAGE.EN,
   fallbackLng: LANGUAGE.EN,
 
   interpolation: {

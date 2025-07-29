@@ -1,23 +1,26 @@
 const defaultValues = {
-  personalInfo: {
-    name: "",
-    nationalId: "",
-    dateOfBirth: "",
-    gender: "",
-    address: "",
-    city: "",
-    state: "",
-    country: "",
-    phone: "",
-    email: "",
-  },
-  familyFinancialInfo: {
-    maritalStatus: "",
-    dependents: "",
-    employmentStatus: "",
-    monthlyIncome: "",
-    housingStatus: "",
-  },
+  name: "",
+  nationalId: "",
+  dateOfBirth: "",
+  gender: "",
+  address: "",
+  city: "",
+  state: "",
+  country: "",
+  phone: "",
+  email: "",
+
+  // familyFinancialInfo
+  maritalStatus: "",
+  dependents: "",
+  employmentStatus: "",
+  monthlyIncome: "",
+  housingStatus: "",
+
+  // situationDescription
+  situationDetails: "",
+  assistanceNeeded: "",
+  additionalComments: "",
 };
 
 const genderOptions = [

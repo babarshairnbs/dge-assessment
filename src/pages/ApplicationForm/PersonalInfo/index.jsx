@@ -1,5 +1,5 @@
 import { Box, Grid, Button, Paper, Typography, MenuItem } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ControlTextField from "@/components/ControlTextField";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
@@ -8,22 +8,10 @@ import personalInfoSchema from "../Constants/validation";
 import { defaultValues, genderOptions } from "../Constants/formConstant";
 import ControlSelect from "@/components/ControlSelect";
 
-const PersonalInfo = ({ onNext }) => {
+const PersonalInfo = () => {
   const { t } = useTranslation();
 
-  const { control, handleSubmit, reset } = useForm({
-    defaultValues: defaultValues?.personalInfo || {},
-    // resolver: yupResolver(personalInfoSchema),
-    mode: "all",
-  });
-
-  const onSubmit = (data) => {
-    onNext(data); // Pass data to parent
-  };
-
-  const handleFormReset = () => {
-    reset(defaultValues?.personalInfo);
-  };
+  const { control } = useFormContext(); // Access form methods from FormProvider
 
   const gridSize6 = {
     xs: 12,
@@ -36,25 +24,7 @@ const PersonalInfo = ({ onNext }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={3}
-      >
-        <Typography variant="h5">{t("PersonalInformation")}</Typography>
-        <Button
-          type="button"
-          variant="outlined"
-          color="warning"
-          onClick={handleFormReset}
-          sx={{ minWidth: "40px", px: 1 }}
-          aria-label={t("reset")}
-        >
-          <RestartAltIcon />
-        </Button>
-      </Box>
+    <Box>
       <Grid container spacing={3} mb={5}>
         <Grid size={gridSize6} mb={2}>
           <ControlTextField
@@ -146,12 +116,6 @@ const PersonalInfo = ({ onNext }) => {
           />
         </Grid>
       </Grid>
-
-      <Box sx={{ textAlign: "right", mt: 4 }}>
-        <Button type="submit" variant="contained" color="primary" size="large">
-          {t("Next")}
-        </Button>
-      </Box>
     </Box>
   );
 };
