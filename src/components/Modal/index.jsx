@@ -7,6 +7,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const AIPopup = ({
   open,
@@ -16,9 +17,10 @@ const AIPopup = ({
   onAccept,
   onChange,
 }) => {
+  const { t } = useTranslation();
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle>AI Suggestion</DialogTitle>
+      <DialogTitle>{t("AISuggestion")}</DialogTitle>
       <DialogContent>
         {loading ? (
           <CircularProgress />
@@ -33,9 +35,9 @@ const AIPopup = ({
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Discard</Button>
+        <Button onClick={onClose}>{t("Discard")}</Button>
         <Button onClick={onAccept} variant="contained">
-          Accept
+          {t("Accept")}
         </Button>
       </DialogActions>
     </Dialog>

@@ -41,10 +41,12 @@ const SituationDescription = ({ onBack, onSubmit }) => {
     },
   });
 
-  const { control, setValue } = useFormContext();
+  const { control, setValue, getValues } = useFormContext();
 
-  const handleHelp = (field, prompt) => {
+  const handleHelp = (field, key) => {
     targetField.current = field;
+    const employmentStatus = getValues("employmentStatus");
+    const prompt = t(key, { status: employmentStatus });
     fetchSuggestion(prompt);
     setOpenPopup(true);
   };
@@ -65,6 +67,19 @@ const SituationDescription = ({ onBack, onSubmit }) => {
     setOpen(false);
   };
 
+  const HelpMeWriteButton = ({ field, promptKey }) => {
+    return (
+      <Button
+        startIcon={<HelpOutlineIcon sx={{ marginLeft: 1 }} />}
+        variant="outlined"
+        onClick={() => handleHelp(field, promptKey)}
+        sx={{ mt: 1 }}
+      >
+        {t("HelpMeWrite")}
+      </Button>
+    );
+  };
+
   return (
     <Box>
       <Grid container spacing={2}>
@@ -78,20 +93,10 @@ const SituationDescription = ({ onBack, onSubmit }) => {
             fullWidth
             required
           />
-
-          <Button
-            startIcon={<HelpOutlineIcon />}
-            variant="outlined"
-            onClick={() =>
-              handleHelp(
-                "currentSituation",
-                "I am struggling financially. Help me describe my current financial situation."
-              )
-            }
-            sx={{ mt: 1 }}
-          >
-            {t("HelpMeWrite")}
-          </Button>
+          <HelpMeWriteButton
+            field={"currentSituation"}
+            promptKey={"CurrentFinancialSituationPrompt"}
+          />
         </Grid>
 
         <Grid size={12} mb={2}>
@@ -104,19 +109,11 @@ const SituationDescription = ({ onBack, onSubmit }) => {
             fullWidth
             required
           />
-          <Button
-            startIcon={<HelpOutlineIcon />}
-            variant="outlined"
-            onClick={() =>
-              handleHelp(
-                "employmentCircumstances",
-                "I have been unemployed recently. Help me describe my employment circumstances."
-              )
-            }
-            sx={{ mt: 1 }}
-          >
-            {t("HelpMeWrite")}
-          </Button>
+
+          <HelpMeWriteButton
+            field={"employmentCircumstances"}
+            promptKey={"EmploymentCircumstancesPrompt"}
+          />
         </Grid>
 
         <Grid size={12} mb={2}>
@@ -129,19 +126,11 @@ const SituationDescription = ({ onBack, onSubmit }) => {
             fullWidth
             required
           />
-          <Button
-            startIcon={<HelpOutlineIcon />}
-            variant="outlined"
-            onClick={() =>
-              handleHelp(
-                "reasonForApplying",
-                "I am applying for government assistance. Help me explain why I need this support."
-              )
-            }
-            sx={{ mt: 1 }}
-          >
-            {t("HelpMeWrite")}
-          </Button>
+
+          <HelpMeWriteButton
+            field={"reasonForApplying"}
+            promptKey={"ReasonForApplyingPrompt"}
+          />
         </Grid>
       </Grid>
 

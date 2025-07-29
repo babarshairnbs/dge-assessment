@@ -19,7 +19,6 @@
   "PersonalInformation": "Personal Information",
   "FamilyFinancialInformation": "Family & Financial Information",
   "SituationDescriptions": "Situation Descriptions",
-
   "Name": "Name",
   "NationalID": "National ID",
   "DateOfBirth": "Date of Birth",
@@ -45,7 +44,6 @@
   "Male": "Male",
   "Female": "Female",
   "Other": "Other",
-
   "MaritalStatus": "Marital Status",
   "NumberOfDependents": "Number of Dependents",
   "EmploymentStatus": "Employment Status",
@@ -65,8 +63,6 @@
   "WithFamily": "With Family",
   "Homeless": "Homeless",
   "Back": "Back",
-
-  "-----------NEW": "-----------NEW",
   "CurrentFinancialSituation": "Current Financial Situation",
   "EmploymentCircumstances": "Employment Circumstances",
   "ReasonForApplying": "Reason for Applying",
@@ -82,5 +78,11 @@
   "SomethingWentWrong": "Something went wrong!",
   "UnexpectedErrorMessage": "An unexpected error occurred. Please try again or return to the home screen.",
   "TryAgain": "Try Again",
-  "GoHome": "Go Home"
+  "GoHome": "Go Home",
+  "CurrentFinancialSituationPrompt": "Please help me write a short paragraph explaining my current financial situation. I am facing financial difficulties due to limited income and rising living expenses. The description should sound honest, respectful, and suitable for a government assistance application.",
+  "EmploymentCircumstancesPrompt": "Please help me describe my current employment circumstances. I have been {{status}}. The explanation should include recent job history, any challenges in finding or keeping a job, and be appropriate for a formal support application.",
+  "ReasonForApplyingPrompt": "Please help me write a compelling reason for why I am applying for government financial assistance. It should express my need for support, my willingness to improve my situation, and convey sincerity without sounding overly dramatic.",
+  "AISuggestion": "AI Suggestion",
+  "Discard": "Discard",
+  "Accept": "Accept"
 }
