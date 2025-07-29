@@ -1,9 +1,10 @@
 import { createContext } from "react";
+import { GLOBAL_CONSTANTS } from "../constants";
 
 const ThemeContext = createContext({
-  mode: "light",
+  mode: GLOBAL_CONSTANTS.THEME.LIGHT,
   toggleMode: () => {},
-  direction: "ltr",
+  direction: GLOBAL_CONSTANTS.DIRECTION.LTR,
   setDirection: () => {},
 });
 

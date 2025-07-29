@@ -1,14 +1,13 @@
-import { Container } from "@mui/material";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RouterProvider } from "react-router";
 import CustomThemeProvider from "./components/CustomThemeProvider";
+import Footer from "./components/Footer";
 import GlobalError from "./components/GlobalError";
+import Header from "./components/Header";
 import { LanguageProvider } from "./components/LanguageProvider";
 import Loading from "./components/Loading";
 import router from "./config/routes";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 function App() {
   return (

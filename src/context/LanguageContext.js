@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { LANGUAGE } from "../constants";
+import { GLOBAL_CONSTANTS, LANGUAGE } from "../constants";
 
 const LanguageContext = createContext({
   language: LANGUAGE.EN,
-  direction: "ltr",
+  direction: GLOBAL_CONSTANTS.DIRECTION.LTR,
   changeLanguage: () => {},
   isRTL: false,
 });

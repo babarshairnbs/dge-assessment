@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useThemeMode from "../../hooks/useThemeMode";
 import { LanguageContextProvider } from "../../context/LanguageContext";
-import { LANGUAGE } from "../../constants";
+import { GLOBAL_CONSTANTS, LANGUAGE } from "../../constants";
 
 export const LanguageProvider = ({ children }) => {
   const { i18n } = useTranslation();
@@ -15,7 +15,9 @@ export const LanguageProvider = ({ children }) => {
 
   const [direction, setDirectionState] = useState(() => {
     const savedLanguage = localStorage.getItem("social_support_language");
-    return savedLanguage === LANGUAGE.AR ? "rtl" : "ltr";
+    return savedLanguage === LANGUAGE.AR
+      ? GLOBAL_CONSTANTS.DIRECTION.RTL
+      : GLOBAL_CONSTANTS.DIRECTION.LTR;
   });
 
   useEffect(() => {
@@ -27,7 +29,10 @@ export const LanguageProvider = ({ children }) => {
   }, []);
 
   const changeLanguage = (newLanguage) => {
-    const newDirection = newLanguage === LANGUAGE.AR ? "rtl" : "ltr";
+    const newDirection =
+      newLanguage === LANGUAGE.AR
+        ? GLOBAL_CONSTANTS.DIRECTION.RTL
+        : GLOBAL_CONSTANTS.DIRECTION.LTR;
 
     setLanguage(newLanguage);
     setDirectionState(newDirection);
@@ -50,7 +55,7 @@ export const LanguageProvider = ({ children }) => {
     language,
     direction,
     changeLanguage,
-    isRTL: direction === "rtl",
+    isRTL: direction === GLOBAL_CONSTANTS.DIRECTION.RTL,
   };
 
   return (

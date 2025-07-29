@@ -1,0 +1,25 @@
+import { t } from "i18next";
+import * as yup from "yup";
+
+const personalInfoSchema = yup.object().shape({
+  name: yup.string().required(t("NameIsRequired")),
+  nationalId: yup.string().required(t("NationalIdIsRequired")),
+  dateOfBirth: yup.date().required(t("DateOfBirthIsRequired")),
+  gender: yup.string().required(t("GenderIsRequired")),
+  address: yup.string().required(t("AddressIsRequired")),
+  city: yup.string().required(t("CityIsRequired")),
+  state: yup.string().required(t("StateIsRequired")),
+  country: yup.string().required(t("CountryIsRequired")),
+  phone: yup.string().required(t("PhoneIsRequired")),
+  email: yup.string().email(t("InvalidEmail")).required(t("EmailIsRequired")),
+});
+
+const situationInfoSchema = yup.object().shape({
+  currentSituation: yup.string().required(t("CurrentSituationRequired")),
+  employmentCircumstances: yup
+    .string()
+    .required(t("EmploymentCircumstancesRequired")),
+  reasonForApplying: yup.string().required(t("ReasonForApplyingRequired")),
+});
+
+export default personalInfoSchema;

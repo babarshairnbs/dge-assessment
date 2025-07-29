@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { GLOBAL_CONSTANTS } from "../../constants";
 
 const getAppTheme = (mode, direction) =>
   createTheme({
@@ -6,25 +7,26 @@ const getAppTheme = (mode, direction) =>
     palette: {
       mode,
       primary: {
-        main: mode === "light" ? "#2196f3" : "#90caf9",
-        light: mode === "light" ? "#64b5f6" : "#bbdefb",
-        dark: mode === "light" ? "#1976d2" : "#42a5f5",
+        main: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#2196f3" : "#90caf9",
+        light: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#64b5f6" : "#bbdefb",
+        dark: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#1976d2" : "#42a5f5",
       },
       secondary: {
-        main: mode === "light" ? "#f50057" : "#f48fb1",
+        main: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#f50057" : "#f48fb1",
       },
       background: {
-        default: mode === "light" ? "#fafafa" : "#121212",
-        paper: mode === "light" ? "#ffffff" : "#1e1e1e",
+        default: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#fafafa" : "#121212",
+        paper: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#ffffff" : "#1e1e1e",
       },
       text: {
-        primary: mode === "light" ? "#212121" : "#ffffff",
-        secondary: mode === "light" ? "#757575" : "#b0b0b0",
+        primary: mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#212121" : "#ffffff",
+        secondary:
+          mode === GLOBAL_CONSTANTS.THEME.LIGHT ? "#757575" : "#b0b0b0",
       },
     },
     typography: {
       fontFamily:
-        direction === "rtl"
+        direction === GLOBAL_CONSTANTS.DIRECTION.RTL
           ? '"Cairo", "Roboto", "Helvetica", "Arial", sans-serif'
           : '"Roboto", "Helvetica", "Arial", sans-serif',
       h1: {
@@ -90,7 +92,7 @@ const getAppTheme = (mode, direction) =>
           root: {
             borderRadius: 12,
             boxShadow:
-              mode === "light"
+              mode === GLOBAL_CONSTANTS.THEME.LIGHT
                 ? "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
                 : "0 1px 3px rgba(255,255,255,0.12), 0 1px 2px rgba(255,255,255,0.24)",
           },

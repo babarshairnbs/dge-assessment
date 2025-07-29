@@ -12,7 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { LANGUAGE } from "../../constants";
+import { GLOBAL_CONSTANTS, LANGUAGE } from "../../constants";
 import { useLanguage } from "../../hooks/useLanguage";
 import useThemeMode from "../../hooks/useThemeMode";
 import { useTranslation } from "react-i18next";
@@ -33,6 +33,7 @@ const Header = () => {
       sx={{
         bgcolor: "primary.main",
         borderBottom: `1px solid ${alpha(theme.palette.divider, 0.12)}`,
+        borderRadius: 0,
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -49,7 +50,7 @@ const Header = () => {
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           {/* Language Selector */}
-          <FormControl size="small" sx={{ minWidth: 120 }}>
+          <FormControl size="small" sx={{ minWidth: 150 }}>
             <InputLabel
               id="language-select-label"
               sx={{ color: "primary.contrastText" }}
@@ -93,7 +94,11 @@ const Header = () => {
               },
             }}
           >
-            {mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+            {mode === GLOBAL_CONSTANTS.THEME.DARK ? (
+              <Brightness7 />
+            ) : (
+              <Brightness4 />
+            )}
           </IconButton>
         </Box>
       </Toolbar>

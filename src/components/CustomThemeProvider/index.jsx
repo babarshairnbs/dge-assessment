@@ -3,21 +3,26 @@ import { ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { ThemeContextProvider } from "../../context/ThemeContext";
 import getAppTheme from "../../utils/theme";
+import { GLOBAL_CONSTANTS } from "../../constants";
 
 const CustomThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
     const savedMode = localStorage.getItem("social_support_theme_mode");
-    return savedMode || "light";
+    return savedMode || GLOBAL_CONSTANTS.THEME.LIGHT;
   });
 
-  const [direction, setDirection] = useState("ltr");
+  const [direction, setDirection] = useState(GLOBAL_CONSTANTS.DIRECTION.LTR);
 
   useEffect(() => {
     localStorage.setItem("social_support_theme_mode", mode);
   }, [mode]);
 
   const toggleMode = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) =>
+      prevMode === GLOBAL_CONSTANTS.THEME.LIGHT
+        ? GLOBAL_CONSTANTS.THEME.DARK
+        : GLOBAL_CONSTANTS.THEME.LIGHT
+    );
   };
 
   const theme = React.useMemo(
