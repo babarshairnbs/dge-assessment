@@ -1,20 +1,18 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
-// import { clearFormData } from "@/services/localStorageService";
-// import { useFormContextData } from "@/context/FormContext";
-import { ROUTES } from "@/constants";
 import { useTranslation } from "react-i18next";
+import { ROUTES } from "../../constants";
+import { clearLocalStorageItem } from "../../services/localStorageService";
+import STORAGE_KEY from "../../constants/Storage";
 
 const SuccessPage = () => {
   const navigate = useNavigate();
-  //   const { setFormData } = useFormContextData();
   const { t } = useTranslation();
 
   const handleNewApplication = () => {
-    // clearFormData();
-    // setFormData({});
-    navigate(ROUTES.APPLICATION);
+    clearLocalStorageItem(STORAGE_KEY.APPLICATION_DATA);
+    navigate(ROUTES.HOME);
   };
 
   return (
